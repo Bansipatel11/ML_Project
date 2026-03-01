@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 import joblib
 import numpy as np
-import pandas as pd
+# import pandas as pd
 import os
 
 app = Flask(__name__, static_folder="Frontend", static_url_path="")
