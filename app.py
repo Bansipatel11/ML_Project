@@ -9,10 +9,21 @@ app = Flask(__name__, static_folder="Frontend", static_url_path="")
 # ===============================
 # Load trained model
 # ===============================
+# MODEL_PATH = "model/model.pkl"
+# model = joblib.load(MODEL_PATH)
+# SCALER_PATH = "model/scaler.pkl"
+# scaler = joblib.load(SCALER_PATH)
 MODEL_PATH = "model/model.pkl"
-model = joblib.load(MODEL_PATH)
 SCALER_PATH = "model/scaler.pkl"
-scaler = joblib.load(SCALER_PATH)
+
+model = None
+scaler = None
+
+def load_model():
+    global model, scaler
+    if model is None:
+        model = joblib.load(MODEL_PATH)
+        scaler = joblib.load(SCALER_PATH)
 
 # ===============================
 # Serve UI Pages
