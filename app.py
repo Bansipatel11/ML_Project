@@ -3,6 +3,7 @@ import joblib
 import numpy as np
 # import pandas as pd
 import os
+import traceback
 
 app = Flask(__name__, static_folder="Frontend", static_url_path="")
 
@@ -42,12 +43,16 @@ def serve_ui(filename):
 @app.route("/predict", methods=["POST"])
 def predict():
     print(">>> Prediction request received")
-    data = request.get_json()
-    print(f">>> Data: {data}")
+    # data = request.get_json()
+    # print(f">>> Data: {data}")
 
     try:
         # -------- Numeric Inputs --------
+        data = request.get_json()
+        print(data)
+
         load_model()
+        print("Model Loaded")
         age = int(data["age"])
         gender = int(data["gender"])
         height = int(data["height"])
@@ -111,13 +116,21 @@ def predict():
             "f1": 72.0
         })
 
+    # except Exception as e:
+    #     print(f">>> Prediction failed: {str(e)}")
+    #     return jsonify({
+    #         "success": False,
+    #         "error": "Prediction failed",
+    #         "details": str(e)
+    #     }), 500
     except Exception as e:
-        print(f">>> Prediction failed: {str(e)}")
-        return jsonify({
-            "success": False,
-            "error": "Prediction failed",
-            "details": str(e)
-        }), 500
+        traceback.print_exc()
+    print(f"Prediction Error: {e}")
+
+    return jsonify({
+        "success": False,
+        "error": str(e)
+    }), 500
 
 
 # ===============================
