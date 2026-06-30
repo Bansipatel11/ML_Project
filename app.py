@@ -47,6 +47,7 @@ def predict():
 
     try:
         # -------- Numeric Inputs --------
+        load_model()
         age = int(data["age"])
         gender = int(data["gender"])
         height = int(data["height"])
@@ -67,9 +68,13 @@ def predict():
         # Expected by Scaler (14 features):
         # [id, age, gender, height, weight, ap_hi, ap_lo, cholesterol, gluc, smoke, alco, active, bmi, bp_avg]
         # We set 'id' to 50000 (mean) to be neutral in scaling.
+        # features = np.array([[
+        #     50000, age, gender, height, weight, ap_hi, ap_lo, 
+        #     cholesterol, gluc, smoke, alco, active, bmi, bp_avg
+        # ]])
         features = np.array([[
-            50000, age, gender, height, weight, ap_hi, ap_lo, 
-            cholesterol, gluc, smoke, alco, active, bmi, bp_avg
+             age, gender, height, weight, ap_hi, ap_lo, 
+            cholesterol, gluc, smoke, alco, active, bmi
         ]])
         
         # 4. Scale features
