@@ -125,12 +125,12 @@ def predict():
     #     }), 500
     except Exception as e:
         traceback.print_exc()
-    print(f"Prediction Error: {e}")
+        print(f"Prediction Error: {e}")
 
-    return jsonify({
-        "success": False,
-        "error": str(e)
-    }), 500
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
 
 
 # ===============================
