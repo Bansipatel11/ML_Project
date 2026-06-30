@@ -53,6 +53,20 @@ def predict():
 
         load_model()
         print("Model Loaded")
+
+        print("Scaler:", scaler)
+        print("Model:", model)
+
+        print("Before transform")
+
+        features_scaled = scaler.transform(features)
+
+        print("After transform")
+
+        prediction = model.predict(features_scaled)
+
+        print("Prediction Done")
+        # print("Model Loaded")
         age = int(data["age"])
         gender = int(data["gender"])
         height = int(data["height"])
